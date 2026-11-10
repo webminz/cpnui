@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE workspaceElements PUBLIC "-//CPN//DTD CPNXML 1.0//EN" "http://cpntools.org/DTD/6/cpn.dtd">
+<workspaceElements>
+  <generator tool="CPN Tools" version="4.0.1" format="6"/>
+  <cpnet>
+    <globbox>
+      
+      <block id="ID2">
+        <id>Standard priorities</id>
+        <ml id="e0c6c35b-6364-4175-a2f8-fb7a1f2d31fe">
+          val P_HIGH = 100;
+          <layout>val P_HIGH = 100;</layout>
+        </ml>
+        <ml id="2719fbb5-40c6-40d1-9928-e62406e3ea3a">
+          val P_NORMAL = 1000;
+          <layout>val P_NORMAL = 1000;</layout>
+        </ml>
+        <ml id="8070810f-ab8f-495a-8dd9-31e4c9a89b7f">
+          val P_LOW = 10000;
+          <layout>val P_LOW = 10000;</layout>
+        </ml>
+      </block>
+      <block id="ID1">
+        <id>Standard declarations</id>
+        <color id="64a99460-096b-425a-83c8-b075e4f39d36">
+              <id>UNIT</id>
+              <unit/>
+              <layout>colset UNIT = unit;</layout>
+            </color>
+        <color id="c17fa361-028f-4d87-89a0-b9d972374ef0">
+              <id>BOOL</id>
+              <bool/>
+              <layout>colset BOOL = bool;</layout>
+            </color>
+        <color id="29df0b92-4398-48a1-9c78-50070e5d60b0">
+              <id>INT</id>
+              <int/>
+              <layout>colset INT = int;</layout>
+            </color>
+        <color id="18838059-c5f8-42d9-a93f-b4cacea820b8">
+              <id>INTINF</id>
+              <intinf/>
+              <layout>colset INTINF = intinf;</layout>
+            </color>
+        <color id="5edfa769-b5a9-422a-bd26-c1b8a787c06f">
+              <id>TIME</id>
+              <time/>
+              <layout>colset TIME = time;</layout>
+            </color>
+        <color id="16ec2a4f-8808-4cbb-b18c-7ad03aa0e4a5">
+              <id>REAL</id>
+              <real/>
+              <layout>colset REAL = real;</layout>
+            </color>
+        <color id="683fd823-5bfb-4e77-8718-3968afbe57b5">
+              <id>STRING</id>
+              <string/>
+              <layout>colset STRING = string;</layout>
+            </color>
+        <var id="fe916c12-7716-46c3-a5a2-1e2afd50c68b">
+          <type>
+            <id>INT</id>
+          </type>
+          <id>var1</id>
+          <layout>var var1:INT;</layout>
+        </var>
+        
+      </block>
+    </globbox>
+    <page id="ID6">
+        <pageattr name="Petri Net"/>
+        <place id="a">
+            <posattr x="-228.34123222748815" y="-94.56161137440759"/>
+            <fillattr colour="White" pattern="" filled="false"/>
+            <lineattr colour="Black" thick="1" type="Solid"/>
+            <textattr colour="Black" bold="false"/>
+            <text>start</text>
+            <ellipse w="60.000000" h="40.000000"/>
+            <type id="INT">
+              <text>INT</text>
+            </type>
+            <initmark id="a_initmark">
+              <text>[1, 5, 5, 10]</text>
+            </initmark>
+          </place>
+<place id="c">
+            <posattr x="-6.812796208530804" y="-57.47630331753556"/>
+            <fillattr colour="White" pattern="" filled="false"/>
+            <lineattr colour="Black" thick="1" type="Solid"/>
+            <textattr colour="Black" bold="false"/>
+            <text>end place</text>
+            <ellipse w="60.000000" h="40.000000"/>
+            <type id="INT">
+              <text>INT</text>
+            </type>
+            <initmark id="c_initmark">
+              <text></text>
+            </initmark>
+          </place>
+        <trans id="b">
+            <posattr x="-100" y="-100"/>
+            <fillattr colour="White" pattern="" filled="false"/>
+            <lineattr colour="Black" thick="1" type="solid"/>
+            <textattr colour="Black" bold="false"/>
+            <text>transition</text>
+            <box w="60.000000" h="40.000000"/>
+            
+            
+            
+          </trans>
+        <arc id="a->b" orientation="PtoT">
+            <posattr x="0.000000" y="0.000000"/>
+            <fillattr colour="White" pattern="" filled="false"/>
+            <lineattr colour="Black" thick="1" type="Solid"/>
+            <textattr colour="Black" bold="false"/>
+            <arrowattr headsize="1.200000" currentcyckle="2"/>
+            <transend idref="b"/>
+            <placeend idref="a"/>
+            <annot id="a->b_inscription">
+              <text>var1</text>
+            </annot>
+          </arc>
+<arc id="b->c" orientation="PtoT">
+            <posattr x="0.000000" y="0.000000"/>
+            <fillattr colour="White" pattern="" filled="false"/>
+            <lineattr colour="Black" thick="1" type="Solid"/>
+            <textattr colour="Black" bold="false"/>
+            <arrowattr headsize="1.200000" currentcyckle="2"/>
+            <transend idref="c"/>
+            <placeend idref="b"/>
+            <annot id="b->c_inscription">
+              <text>var1</text>
+            </annot>
+          </arc>
+        <constraints/>
+      </page>
+    <monitorblock name="Monitors"/>
+  </cpnet>
+</workspaceElements>

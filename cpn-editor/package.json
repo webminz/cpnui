@@ -1,0 +1,52 @@
+{
+  "name": "cpn-editor",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "e2e": "playwright test"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "angular"
+        }
+      }
+    ]
+  },
+  "private": true,
+  "packageManager": "npm@11.6.0",
+  "dependencies": {
+    "@angular/common": "^21.1.0",
+    "@angular/compiler": "^21.1.0",
+    "@angular/core": "^21.1.0",
+    "@angular/forms": "^21.1.0",
+    "@angular/platform-browser": "^21.1.0",
+    "@angular/router": "^21.1.0",
+    "@codemirror/autocomplete": "^6.20.1",
+    "@codemirror/commands": "^6.10.2",
+    "@codemirror/language": "^6.12.2",
+    "@codemirror/state": "^6.5.4",
+    "@codemirror/view": "^6.39.16",
+    "@lezer/highlight": "^1.2.3",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^21.1.2",
+    "@angular/cli": "^21.1.2",
+    "@angular/compiler-cli": "^21.1.0",
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^25.3.3",
+    "jsdom": "^27.1.0",
+    "typescript": "~5.9.2",
+    "vitest": "^4.0.8"
+  }
+}

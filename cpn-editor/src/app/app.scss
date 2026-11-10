@@ -1,0 +1,21 @@
+.app-shell {
+  display: grid;
+  grid-template-areas:
+    "toolbar"
+    "canvas";
+  grid-template-rows: 44px 1fr;
+  grid-template-columns: 1fr;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.app-toolbar {
+  grid-area: toolbar;
+}
+
+.app-canvas {
+  grid-area: canvas;
+  overflow: hidden;
+  position: relative;
+}

@@ -1,0 +1,7 @@
+# Phase 4: PNML Import/Export
+
+## Status: TODO
+
+- [ ] Export model to PNML XML file (download)
+- [ ] Import PNML file and render on canvas
+- [ ] Round-trip test coverage
