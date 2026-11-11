@@ -461,6 +461,7 @@ describe('parseCpnXml', () => {
 // ---------------------------------------------------------------------------
 
 import { computeNormalizationScale, normalizeNetScale } from './cpn-import';
+import { serializeCpnXml } from './cpn-export';
 
 const LEGACY_GLOBBOX = `<?xml version="1.0" encoding="iso-8859-1"?>
 <workspaceElements>
@@ -635,6 +636,33 @@ describe('normalizeNetScale', () => {
     const bp = scaled.pages[0].arcs[0].bendPoints[0];
     expect(bp.x).toBeCloseTo(10 * factor, 3);
     expect(bp.y).toBeCloseTo(20 * factor, 3);
+  });
+
+  it('scales moved labels with the net, so their exported positions scale exactly', () => {
+    const net = parseCpnXml(LEGACY_GLOBBOX);
+    const page = net.pages[0];
+    page.places[0].labelOffsets = { colourSet: { x: 2, y: -1 } };
+    page.transitions[0].labelOffsets = { guard: { x: -3, y: 4 } };
+    page.arcs[0].labelOffsets = { inscription: { x: 5, y: 6 } };
+    const factor = computeNormalizationScale(net);
+
+    const labelPositions = (xml: string) =>
+      Array.from(
+        new DOMParser()
+          .parseFromString(xml, 'application/xml')
+          .querySelectorAll(
+            'place > type > posattr, trans > cond > posattr, arc > annot > posattr',
+          ),
+      ).map((pos) => ({ x: Number(pos.getAttribute('x')), y: Number(pos.getAttribute('y')) }));
+
+    const before = labelPositions(serializeCpnXml(net));
+    const after = labelPositions(serializeCpnXml(normalizeNetScale(net)));
+    expect(before.length).toBeGreaterThan(0);
+    expect(after).toHaveLength(before.length);
+    after.forEach((pos, i) => {
+      expect(pos.x).toBeCloseTo(before[i].x * factor, 3);
+      expect(pos.y).toBeCloseTo(before[i].y * factor, 3);
+    });
   });
 
   it('leaves nets at the modern CPN Tools scale untouched', () => {

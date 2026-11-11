@@ -38,12 +38,12 @@ describe('serializeCpnXml', () => {
     });
     const xml = serializeCpnXml(net);
     expect(xml).toContain('<?xml');
-    expect(xml).toContain('<place id="p1">');
+    expect(xml).toMatch(/<place id="ID\d+">/);
     expect(xml).toContain('<text>MyPlace</text>');
     expect(xml).toContain('x="100"');
     expect(xml).toContain('y="50"'); // Y negated back: -(-50) = 50
     expect(xml).toContain('<ellipse');
-    expect(xml).toContain('<type id="INT">');
+    expect(xml).toMatch(/<type id="[^"]+">/);
     expect(xml).toContain('<text>INT</text>');
     expect(xml).toContain('1`1');
   });
@@ -71,7 +71,7 @@ describe('serializeCpnXml', () => {
       ],
     });
     const xml = serializeCpnXml(net);
-    expect(xml).toContain('<trans id="t1">');
+    expect(xml).toMatch(/<trans id="ID\d+">/);
     expect(xml).toContain('<text>MyTrans</text>');
     expect(xml).toContain('<box w="80.000000" h="50.000000"/>');
     expect(xml).toContain('[x&gt;0]'); // escaped
@@ -121,9 +121,12 @@ describe('serializeCpnXml', () => {
       ],
     });
     const xml = serializeCpnXml(net);
-    expect(xml).toContain('<arc id="a1" orientation="PtoT">');
-    expect(xml).toContain('<transend idref="t1"/>');
-    expect(xml).toContain('<placeend idref="p1"/>');
+    expect(xml).toMatch(/<arc id="ID\d+" orientation="PtoT">/);
+    const doc = new DOMParser().parseFromString(xml, 'application/xml');
+    const transId = doc.querySelector('trans')!.getAttribute('id');
+    const placeId = doc.querySelector('place')!.getAttribute('id');
+    expect(doc.querySelector('arc > transend')!.getAttribute('idref')).toBe(transId);
+    expect(doc.querySelector('arc > placeend')!.getAttribute('idref')).toBe(placeId);
     expect(xml).toContain('<text>var1</text>');
   });
 
@@ -293,7 +296,7 @@ describe('serializeCpnXml', () => {
 
     // Compare place data
     for (const p1 of net1.pages[0].places) {
-      const p2 = net2.pages[0].places.find((p) => p.id === p1.id)!;
+      const p2 = net2.pages[0].places.find((p) => p.name === p1.name)!;
       expect(p2).toBeDefined();
       expect(p2.name).toBe(p1.name);
       expect(p2.position.x).toBeCloseTo(p1.position.x, 2);
@@ -304,19 +307,21 @@ describe('serializeCpnXml', () => {
 
     // Compare transition data
     for (const t1 of net1.pages[0].transitions) {
-      const t2 = net2.pages[0].transitions.find((t) => t.id === t1.id)!;
+      const t2 = net2.pages[0].transitions.find((t) => t.name === t1.name)!;
       expect(t2).toBeDefined();
       expect(t2.name).toBe(t1.name);
     }
 
     // Compare arc data
-    for (const a1 of net1.pages[0].arcs) {
-      const a2 = net2.pages[0].arcs.find((a) => a.id === a1.id)!;
-      expect(a2).toBeDefined();
-      expect(a2.sourceId).toBe(a1.sourceId);
-      expect(a2.targetId).toBe(a1.targetId);
+    // Model ids are remapped on export, so compare arc endpoints by element name.
+    const nameOf = (net: CpnNet, id: string) =>
+      [...net.pages[0].places, ...net.pages[0].transitions].find((e) => e.id === id)?.name;
+    net1.pages[0].arcs.forEach((a1, i) => {
+      const a2 = net2.pages[0].arcs[i];
+      expect(nameOf(net2, a2.sourceId)).toBe(nameOf(net1, a1.sourceId));
+      expect(nameOf(net2, a2.targetId)).toBe(nameOf(net1, a1.targetId));
       expect(a2.inscription.text).toBe(a1.inscription.text);
-    }
+    });
   });
 
   it('should round-trip with bend points', () => {
@@ -348,7 +353,7 @@ describe('serializeCpnXml', () => {
     const net2 = parseCpnXml(serialized);
 
     const a1 = net1.pages[0].arcs[0];
-    const a2 = net2.pages[0].arcs.find((a) => a.id === a1.id)!;
+    const a2 = net2.pages[0].arcs[0];
     expect(a2.bendPoints).toHaveLength(a1.bendPoints.length);
     for (let i = 0; i < a1.bendPoints.length; i++) {
       expect(a2.bendPoints[i].x).toBeCloseTo(a1.bendPoints[i].x, 1);
@@ -411,7 +416,7 @@ describe('serializeCpnXml — colour set structured types (Bug 1)', () => {
     });
     const xml = serializeCpnXml(net);
     const normalized = xml.replace(/\s+/g, '');
-    expect(normalized).toContain('<colorid="c1"><id>INT</id><int/>');
+    expect(normalized).toMatch(/<colorid="ID\d+"><id>INT<\/id><int\/>/);
     expect(xml).toContain('<layout>colset INT = int;</layout>');
   });
 
@@ -700,5 +705,205 @@ describe('serializeCpnXml — round-trip with structured types', () => {
     const parsed = parseCpnXml(xml);
     // Without layout, importer should reconstruct from structured XML
     expect(parsed.colourSets[0].declaration).toBe('colset INTxDATA = product INT * DATA timed;');
+  });
+});
+
+describe('serializeCpnXml — CPN Tools compatibility (#1)', () => {
+  /** Exercises every id-bearing element: shared colour sets, all inscriptions, bend points. */
+  function richNet(): CpnNet {
+    return minimalNet({
+      colourSets: [{ id: '2485f676-cs', name: 'Pat', declaration: 'colset Pat = int;' }],
+      declarations: 'var p : Pat;\nval x = 1;',
+      pages: [
+        {
+          id: '3348309a-page',
+          name: 'Page 1',
+          places: [
+            {
+              kind: 'place',
+              id: 'ef4ecefc-wait',
+              name: 'wait',
+              position: { x: -400, y: -200 },
+              size: { width: 40, height: 20 },
+              colourSetId: 'Pat',
+              initialMarking: { text: '1`1' },
+            },
+            {
+              kind: 'place',
+              id: '3097cc0f-done',
+              name: 'done',
+              position: { x: 0, y: -200 },
+              size: { width: 40, height: 20 },
+              colourSetId: 'Pat',
+              initialMarking: { text: '' },
+            },
+          ],
+          transitions: [
+            {
+              kind: 'transition',
+              id: '9cabfc30-start',
+              name: 'start',
+              position: { x: -200, y: -200 },
+              size: { width: 60, height: 40 },
+              guard: { text: '[p > 0]' },
+              duration: { text: '5' },
+            },
+          ],
+          arcs: [
+            {
+              kind: 'arc',
+              id: '1a2b3c4d-a1',
+              sourceId: 'ef4ecefc-wait',
+              targetId: '9cabfc30-start',
+              bendPoints: [{ x: -300, y: -250 }],
+              inscription: { text: 'p' },
+              arcType: 'normal',
+              drawMode: 'straight',
+            },
+            {
+              kind: 'arc',
+              id: '5e6f7a8b-a2',
+              sourceId: '9cabfc30-start',
+              targetId: '3097cc0f-done',
+              bendPoints: [],
+              inscription: { text: 'p' },
+              arcType: 'normal',
+              drawMode: 'straight',
+            },
+          ],
+        },
+      ],
+    });
+  }
+
+  function exportDoc(net: CpnNet): Document {
+    return new DOMParser().parseFromString(serializeCpnXml(net), 'application/xml');
+  }
+
+  function allIds(doc: Document): string[] {
+    return Array.from(doc.querySelectorAll('[id]')).map((el) => el.getAttribute('id')!);
+  }
+
+  it('gives every element a unique id, even when places share a colour set', () => {
+    const ids = allIds(exportDoc(richNet()));
+    expect(ids.length).toBeGreaterThan(0);
+    expect(new Set(ids).size).toBe(ids.length);
+  });
+
+  it('uses valid XML NCNames for every id and idref, and every idref resolves', () => {
+    const doc = exportDoc(richNet());
+    const ncName = /^[A-Za-z_][\w.-]*$/;
+    const ids = allIds(doc);
+    for (const id of ids) expect(id).toMatch(ncName);
+
+    const idrefs = Array.from(doc.querySelectorAll('[idref]')).map(
+      (el) => el.getAttribute('idref')!,
+    );
+    expect(idrefs.length).toBe(4); // two arcs × (transend + placeend)
+    for (const ref of idrefs) {
+      expect(ref).toMatch(ncName);
+      expect(ids).toContain(ref);
+    }
+  });
+
+  it('writes inscriptions with the full posattr/fillattr/lineattr/textattr/text sequence', () => {
+    const doc = exportDoc(richNet());
+    const inscriptions = Array.from(
+      doc.querySelectorAll(
+        'place > type, place > initmark, trans > cond, trans > time, arc > annot',
+      ),
+    );
+    // 2 types + 1 initmark + 1 cond + 1 time + 2 annots
+    expect(inscriptions).toHaveLength(7);
+    for (const el of inscriptions) {
+      expect(Array.from(el.children).map((c) => c.tagName)).toEqual([
+        'posattr',
+        'fillattr',
+        'lineattr',
+        'textattr',
+        'text',
+      ]);
+    }
+  });
+
+  it('closes cpnet with instances, options, binders, monitorblock and IndexNode', () => {
+    const net = richNet();
+    net.pages.push({ id: '7f00-page2', name: 'Page 2', places: [], transitions: [], arcs: [] });
+    const doc = exportDoc(net);
+
+    const cpnet = doc.querySelector('workspaceElements > cpnet')!;
+    expect(Array.from(cpnet.children).map((c) => c.tagName)).toEqual([
+      'globbox',
+      'page',
+      'page',
+      'instances',
+      'options',
+      'binders',
+      'monitorblock',
+      'IndexNode',
+    ]);
+
+    const pageIds = Array.from(cpnet.querySelectorAll(':scope > page')).map((p) => p.id);
+    const instancePages = Array.from(cpnet.querySelectorAll(':scope > instances > instance')).map(
+      (i) => i.getAttribute('page'),
+    );
+    expect(instancePages).toEqual(pageIds);
+  });
+
+  it('round-trips moved inscription labels through their posattr', () => {
+    const net = richNet();
+    const page = net.pages[0];
+    page.places[0].labelOffsets = { colourSet: { x: 10, y: -5 }, marking: { x: -20, y: 30 } };
+    page.transitions[0].labelOffsets = { guard: { x: 7, y: 8 }, duration: { x: -3, y: 12 } };
+    page.arcs[0].labelOffsets = { inscription: { x: 15, y: 25 } };
+
+    const back = parseCpnXml(serializeCpnXml(net)).pages[0];
+    expect(back.places[0].labelOffsets).toEqual(page.places[0].labelOffsets);
+    expect(back.transitions[0].labelOffsets).toEqual(page.transitions[0].labelOffsets);
+    expect(back.arcs[0].labelOffsets).toEqual(page.arcs[0].labelOffsets);
+  });
+
+  it('leaves labels that were never moved without offsets after a round trip', () => {
+    const back = parseCpnXml(serializeCpnXml(richNet())).pages[0];
+    for (const el of [...back.places, ...back.transitions, ...back.arcs]) {
+      expect(el.labelOffsets).toBeUndefined();
+    }
+  });
+});
+
+describe('serializeCpnXml — sample round trip (#1)', () => {
+  /** Model content without ids: ids are remapped on export, so compare by structure. */
+  function shape(net: CpnNet) {
+    return {
+      colourSets: net.colourSets.map(({ name, declaration, color }) => ({
+        name,
+        declaration,
+        color,
+      })),
+      declarations: net.declarations,
+      pages: net.pages.map((page) => {
+        const nameOf = (id: string) =>
+          [...page.places, ...page.transitions].find((e) => e.id === id)?.name;
+        return {
+          name: page.name,
+          places: page.places.map(({ id: _id, ...rest }) => rest),
+          transitions: page.transitions.map(({ id: _id, ...rest }) => rest),
+          arcs: page.arcs.map(({ id: _id, sourceId, targetId, ...rest }) => ({
+            ...rest,
+            source: nameOf(sourceId),
+            target: nameOf(targetId),
+          })),
+        };
+      }),
+    };
+  }
+
+  it('imports, exports and re-imports patient_punch_card.cpn to an equivalent model', async () => {
+    const { readFileSync } = await import('node:fs');
+    const original = parseCpnXml(readFileSync('../samples/patient_punch_card.cpn', 'latin1'));
+    expect(original.pages[0].places.length).toBeGreaterThan(0);
+
+    const reimported = parseCpnXml(serializeCpnXml(original));
+    expect(shape(reimported)).toEqual(shape(original));
   });
 });

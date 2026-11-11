@@ -4,137 +4,168 @@
 <generator tool="CPN Editor" version="1.0.0" format="6"/>
 <cpnet>
 <globbox>
-<color id="7c08780e-fbef-4a6d-977d-a21b67474f2d">
+<color id="ID1">
+<!-- cpn-editor:colour=#3b82f6 -->
 <id>Name</id>
 <string/>
 <layout>colset Name = string;</layout>
 </color>
-<color id="3c9b1c85-a4cc-4111-8711-e3f61f888dae">
+<color id="ID2">
+<!-- cpn-editor:colour=#8b5cf6 -->
 <id>Address</id>
 <string/>
 <layout>colset Address = string;</layout>
 </color>
-<color id="4236c365-c6f8-497a-b55c-26c592fefcb5">
+<color id="ID3">
+<!-- cpn-editor:colour=#ef4444 -->
 <id>DateOfBirth</id>
 <string/>
 <layout>colset DateOfBirth = string;</layout>
 </color>
-<color id="efa57066-9c06-4215-854c-1e7a57d48e8b">
+<color id="ID4">
+<!-- cpn-editor:colour=#22c55e -->
 <id>PatientID</id>
 <int/>
 <layout>colset PatientID = int;</layout>
 </color>
-<color id="6863ac4d-9a2e-4856-b353-01cd20b92ae7">
+<color id="ID5">
+<!-- cpn-editor:colour=#f59e0b -->
 <id>EmpNo</id>
 <int/>
 <layout>colset EmpNo = int;</layout>
 </color>
-<color id="e743deb1-18a6-4305-8d14-bbdee5063b84">
+<color id="ID6">
+<!-- cpn-editor:colour=#06b6d4 -->
 <id>Experience</id>
 <int/>
 <layout>colset Experience = int;</layout>
 </color>
-<color id="af0be8b4-b644-4a30-859f-fef32fb65279">
+<color id="ID7">
+<!-- cpn-editor:colour=#ec4899 -->
 <id>Gender</id>
 <enum><id>male</id><id>female</id></enum>
 <layout>colset Gender = with male|female;</layout>
 </color>
-<color id="2485f676-1504-4558-a4db-fb1595b89296">
+<color id="ID8">
 <!-- cpn-editor:colour=#ef4444 -->
 <id>Pat</id>
 <product><id>PatientID</id><id>Name</id><id>Address</id><id>DateOfBirth</id><id>Gender</id></product>
 <layout>colset Pat = product PatientID * Name * Address * DateOfBirth * Gender;</layout>
 </color>
-<color id="8c49d7ef-dc6f-4ea1-9713-5b4dfaba662c">
+<color id="ID9">
 <!-- cpn-editor:colour=#3b82f6 -->
 <id>Emp</id>
 <product><id>EmpNo</id><id>Experience</id></product>
 <layout>colset Emp = product EmpNo * Experience;</layout>
 </color>
-<color id="8c887bd1-61dc-43f9-8581-49ceb82ca63e">
+<color id="ID10">
 <!-- cpn-editor:colour=#8b5cf6 -->
 <id>EP</id>
 <product><id>Emp</id><id>Pat</id></product>
 <layout>colset EP = product Emp * Pat;</layout>
 </color>
-<var id="1887249b-3711-4ec5-b140-a2381d3dc4af">
+<var id="ID11">
 <type><id>Pat</id></type>
 <id>p</id>
 <layout>var p: Pat;</layout>
 </var>
-<var id="60cde7e2-8a6c-44d9-8b29-8ae0b1f36b4b">
+<var id="ID12">
 <type><id>Emp</id></type>
 <id>emp</id>
 <layout>var emp: Emp;</layout>
 </var>
-<ml id="58c6c65d-3dc3-4f24-86d5-0b6ea1712426">
+<ml id="ID13">
 val Peter = (12345, &quot;Peter&quot;, &quot;Kerkstraat 10, Amsterdam&quot;, &quot;13-Dec-1962&quot;, male);
 <layout>val Peter = (12345, &quot;Peter&quot;, &quot;Kerkstraat 10, Amsterdam&quot;, &quot;13-Dec-1962&quot;, male);</layout>
 </ml>
-<ml id="fe5466c4-2e43-48bf-aa97-88b65ac0aa46">
+<ml id="ID14">
 val Ann = (641112, 7);
 <layout>val Ann = (641112, 7);</layout>
 </ml>
-<ml id="aa46b4bd-342a-4cda-9aec-c98c859718f0">
+<ml id="ID15">
 fun d = if #1(emp)&gt;5 then 3 else 4;
 <layout>fun d = if #1(emp)&gt;5 then 3 else 4;</layout>
 </ml>
 </globbox>
-<page id="3348309a-bfbd-4112-a5e3-ba2f2b618554">
+<page id="ID44">
 <pageattr name="Page 1"/>
-<place id="ef4ecefc-396a-416e-b904-ce004acb8f42">
+<place id="ID18">
 <posattr x="-400" y="200"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <text>wait</text>
 <ellipse w="40.000000" h="20.000000"/>
-<type id="Pat">
+<type id="ID16">
+<posattr x="-374.000000" y="210.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>Pat</text>
 </type>
-<initmark id="ef4ecefc-396a-416e-b904-ce004acb8f42_initmark">
+<initmark id="ID17">
+<posattr x="-374.000000" y="190.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>1`Peter@+2</text>
 </initmark>
 </place>
-<place id="c40800b1-6a2b-4feb-b54a-faff9f992e7a">
+<place id="ID21">
 <posattr x="-200" y="280"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <text>free</text>
 <ellipse w="40.000000" h="20.000000"/>
-<type id="Emp">
+<type id="ID19">
+<posattr x="-174.000000" y="290.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>Emp</text>
 </type>
-<initmark id="c40800b1-6a2b-4feb-b54a-faff9f992e7a_initmark">
+<initmark id="ID20">
+<posattr x="-174.000000" y="270.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>1`Ann@+0</text>
 </initmark>
 </place>
-<place id="689b948a-0872-4c3a-bf45-1ff8dc1a5e54">
+<place id="ID23">
 <posattr x="-200" y="120"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <text>busy</text>
 <ellipse w="40.000000" h="20.000000"/>
-<type id="EP">
+<type id="ID22">
+<posattr x="-174.000000" y="130.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>EP</text>
 </type>
 
 </place>
-<place id="3097cc0f-6ef5-4162-b6e3-87dd69536f76">
+<place id="ID25">
 <posattr x="0" y="200"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <text>done</text>
 <ellipse w="40.000000" h="20.000000"/>
-<type id="Pat">
+<type id="ID24">
+<posattr x="26.000000" y="210.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>Pat</text>
 </type>
 
 </place>
-<trans id="9cabfc30-7830-40de-a0e1-604d8cdcb108">
+<trans id="ID26">
 <posattr x="-300" y="200"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
@@ -144,7 +175,7 @@ fun d = if #1(emp)&gt;5 then 3 else 4;
 
 
 </trans>
-<trans id="ebd6a129-75a2-48ca-92f9-f6704767fff8">
+<trans id="ID27">
 <posattr x="-100" y="200"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
@@ -154,106 +185,146 @@ fun d = if #1(emp)&gt;5 then 3 else 4;
 
 
 </trans>
-<arc id="aae24ba3-9108-4152-8a43-d15945cc6275" orientation="PtoT">
+<arc id="ID29" orientation="PtoT">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="9cabfc30-7830-40de-a0e1-604d8cdcb108"/>
-<placeend idref="ef4ecefc-396a-416e-b904-ce004acb8f42"/>
-<annot id="aae24ba3-9108-4152-8a43-d15945cc6275_inscription">
+<transend idref="ID26"/>
+<placeend idref="ID18"/>
+<annot id="ID28">
+<posattr x="-350.000000" y="214.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>p</text>
 </annot>
 </arc>
-<arc id="5445f728-1eb9-4502-897c-882bc1f6a486" orientation="TtoP">
+<arc id="ID32" orientation="TtoP">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="9cabfc30-7830-40de-a0e1-604d8cdcb108"/>
-<placeend idref="689b948a-0872-4c3a-bf45-1ff8dc1a5e54"/>
-<bendpoint id="5445f728-1eb9-4502-897c-882bc1f6a486_bp1" serial="1">
+<transend idref="ID26"/>
+<placeend idref="ID23"/>
+<bendpoint id="ID30" serial="1">
 <posattr x="-280" y="120"/>
 <fillattr colour="White" pattern="Solid" filled="false"/>
 <lineattr colour="Black" thick="0" type="Solid"/>
 <textattr colour="Black" bold="false"/>
 <text></text>
 </bendpoint>
-<annot id="5445f728-1eb9-4502-897c-882bc1f6a486_inscription">
+<annot id="ID31">
+<posattr x="-240.000000" y="134.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>(emp,p)@+d(emp)</text>
 </annot>
 </arc>
-<arc id="4ab50f1f-9323-4383-b06f-ebdd4050a7a0" orientation="PtoT">
+<arc id="ID35" orientation="PtoT">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="ebd6a129-75a2-48ca-92f9-f6704767fff8"/>
-<placeend idref="689b948a-0872-4c3a-bf45-1ff8dc1a5e54"/>
-<bendpoint id="4ab50f1f-9323-4383-b06f-ebdd4050a7a0_bp1" serial="1">
+<transend idref="ID27"/>
+<placeend idref="ID23"/>
+<bendpoint id="ID33" serial="1">
 <posattr x="-100" y="120"/>
 <fillattr colour="White" pattern="Solid" filled="false"/>
 <lineattr colour="Black" thick="0" type="Solid"/>
 <textattr colour="Black" bold="false"/>
 <text></text>
 </bendpoint>
-<annot id="4ab50f1f-9323-4383-b06f-ebdd4050a7a0_inscription">
+<annot id="ID34">
+<posattr x="-100.000000" y="174.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>(emp,p)</text>
 </annot>
 </arc>
-<arc id="84893327-c44b-4454-88e0-514695eda95a" orientation="TtoP">
+<arc id="ID37" orientation="TtoP">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="ebd6a129-75a2-48ca-92f9-f6704767fff8"/>
-<placeend idref="3097cc0f-6ef5-4162-b6e3-87dd69536f76"/>
-<annot id="84893327-c44b-4454-88e0-514695eda95a_inscription">
+<transend idref="ID27"/>
+<placeend idref="ID25"/>
+<annot id="ID36">
+<posattr x="-50.000000" y="214.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>p</text>
 </annot>
 </arc>
-<arc id="a5dff026-274e-4856-85b9-bc73d64f0d42" orientation="TtoP">
+<arc id="ID40" orientation="TtoP">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="ebd6a129-75a2-48ca-92f9-f6704767fff8"/>
-<placeend idref="c40800b1-6a2b-4feb-b54a-faff9f992e7a"/>
-<bendpoint id="a5dff026-274e-4856-85b9-bc73d64f0d42_bp1" serial="1">
+<transend idref="ID27"/>
+<placeend idref="ID21"/>
+<bendpoint id="ID38" serial="1">
 <posattr x="-100" y="280"/>
 <fillattr colour="White" pattern="Solid" filled="false"/>
 <lineattr colour="Black" thick="0" type="Solid"/>
 <textattr colour="Black" bold="false"/>
 <text></text>
 </bendpoint>
-<annot id="a5dff026-274e-4856-85b9-bc73d64f0d42_inscription">
+<annot id="ID39">
+<posattr x="-150.000000" y="294.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>emp</text>
 </annot>
 </arc>
-<arc id="8522743a-78ac-4134-80af-5819fb1c65b3" orientation="PtoT">
+<arc id="ID43" orientation="PtoT">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="9cabfc30-7830-40de-a0e1-604d8cdcb108"/>
-<placeend idref="c40800b1-6a2b-4feb-b54a-faff9f992e7a"/>
-<bendpoint id="8522743a-78ac-4134-80af-5819fb1c65b3_bp1" serial="1">
+<transend idref="ID26"/>
+<placeend idref="ID21"/>
+<bendpoint id="ID41" serial="1">
 <posattr x="-280" y="280"/>
 <fillattr colour="White" pattern="Solid" filled="false"/>
 <lineattr colour="Black" thick="0" type="Solid"/>
 <textattr colour="Black" bold="false"/>
 <text></text>
 </bendpoint>
-<annot id="8522743a-78ac-4134-80af-5819fb1c65b3_inscription">
+<annot id="ID42">
+<posattr x="-290.000000" y="254.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>emp</text>
 </annot>
 </arc>
 </page>
+<instances>
+<instance id="ID45" page="ID44"/>
+</instances>
+<options/>
+<binders>
+<cpnbinder id="ID47" x="0" y="0" width="1200" height="700">
+<sheets>
+<cpnsheet id="ID46" panx="0.000000" pany="0.000000" zoom="1.000000" instance="ID45">
+<zorder><position value="0"/></zorder>
+</cpnsheet>
+</sheets>
+<zorder><position value="0"/></zorder>
+</cpnbinder>
+</binders>
+<monitorblock name="Monitors"/>
+<IndexNode expanded="true"/>
 </cpnet>
 </workspaceElements>

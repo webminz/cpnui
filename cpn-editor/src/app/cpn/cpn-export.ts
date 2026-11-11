@@ -1,4 +1,10 @@
-import { Arc, CpnNet, ElementGraphics, Page, Place, Transition } from '../core/model';
+import { Arc, CpnNet, ElementGraphics, Page, Place, Point, Transition } from '../core/model';
+import {
+  addOffset,
+  arcInscriptionAnchor,
+  placeLabelAnchors,
+  transitionLabelAnchors,
+} from './label-anchors';
 
 function esc(s: string): string {
   return s
@@ -206,6 +212,31 @@ function colourSetTypeXml(declaration: string): string {
   return '';
 }
 
+/**
+ * Allocates CPN Tools–style ids (`ID1`, `ID2`, …) for one export. CPN Tools needs every id
+ * to be a unique XML NCName; editor ids are UUIDs (often starting with a digit), so they are
+ * remapped.
+ */
+class IdAllocator {
+  private next = 1;
+  private readonly mapped = new Map<string, string>();
+
+  /** A new id for an element with no editor id (labels, bend points, declarations). */
+  fresh(): string {
+    return `ID${this.next++}`;
+  }
+
+  /** The stable id for an editor id, so idrefs resolve to the same element. */
+  of(modelId: string): string {
+    let id = this.mapped.get(modelId);
+    if (!id) {
+      id = this.fresh();
+      this.mapped.set(modelId, id);
+    }
+    return id;
+  }
+}
+
 function graphicsAttrs(g?: ElementGraphics): string {
   const fill = g?.fillColor ?? 'White';
   const filled = g?.fillColor ? 'true' : 'false';
@@ -221,27 +252,42 @@ function graphicsAttrs(g?: ElementGraphics): string {
   ].join('\n');
 }
 
-function serializePlace(p: Place): string {
+/**
+ * An inscription (colour set, marking, guard, delay, arc annotation). CPN Tools requires the full
+ * posattr/fillattr/lineattr/textattr/text sequence; `pos` is in editor coordinates (Y down).
+ */
+function inscriptionXml(tag: string, id: string, pos: Point, text: string): string {
+  return `<${tag} id="${id}">
+<posattr x="${pos.x.toFixed(6)}" y="${(-pos.y).toFixed(6)}"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
+<text>${esc(text)}</text>
+</${tag}>`;
+}
+
+function serializePlace(p: Place, ids: IdAllocator): string {
   const x = p.position.x;
   const y = -p.position.y; // negate Y back for CPN Tools
   const w = p.size.width.toFixed(6);
   const h = p.size.height.toFixed(6);
 
+  const anchors = placeLabelAnchors(p);
+  const offsets = p.labelOffsets;
+
   let typeXml = '';
   if (p.colourSetId) {
-    typeXml = `<type id="${esc(p.colourSetId)}">
-<text>${esc(p.colourSetId)}</text>
-</type>`;
+    const pos = addOffset(anchors.colourSet, offsets?.colourSet);
+    typeXml = inscriptionXml('type', ids.fresh(), pos, p.colourSetId);
   }
 
   let initmarkXml = '';
   if (p.initialMarking.text) {
-    initmarkXml = `<initmark id="${esc(p.id)}_initmark">
-<text>${esc(p.initialMarking.text)}</text>
-</initmark>`;
+    const pos = addOffset(anchors.marking, offsets?.marking);
+    initmarkXml = inscriptionXml('initmark', ids.fresh(), pos, p.initialMarking.text);
   }
 
-  return `<place id="${esc(p.id)}">
+  return `<place id="${ids.of(p.id)}">
 <posattr x="${x}" y="${y}"/>
 ${graphicsAttrs(p.graphics)}
 <text>${esc(p.name)}</text>
@@ -251,15 +297,17 @@ ${initmarkXml}
 </place>`;
 }
 
-function serializeTransition(t: Transition): string {
+function serializeTransition(t: Transition, ids: IdAllocator): string {
   const x = t.position.x;
   const y = -t.position.y;
 
+  const anchors = transitionLabelAnchors(t);
+  const offsets = t.labelOffsets;
+
   let condXml = '';
   if (t.guard.text) {
-    condXml = `<cond id="${esc(t.id)}_cond">
-<text>${esc(t.guard.text)}</text>
-</cond>`;
+    const pos = addOffset(anchors.guard, offsets?.guard);
+    condXml = inscriptionXml('cond', ids.fresh(), pos, t.guard.text);
   }
 
   let timeXml = '';
@@ -269,12 +317,11 @@ function serializeTransition(t: Transition): string {
     if (durationText && !durationText.startsWith('@+')) {
       durationText = '@+' + durationText;
     }
-    timeXml = `<time id="${esc(t.id)}_time">
-<text>${esc(durationText)}</text>
-</time>`;
+    const pos = addOffset(anchors.duration, offsets?.duration);
+    timeXml = inscriptionXml('time', ids.fresh(), pos, durationText);
   }
 
-  return `<trans id="${esc(t.id)}">
+  return `<trans id="${ids.of(t.id)}">
 <posattr x="${x}" y="${y}"/>
 ${graphicsAttrs(t.graphics)}
 <text>${esc(t.name)}</text>
@@ -284,7 +331,7 @@ ${timeXml}
 </trans>`;
 }
 
-function serializeArc(a: Arc, page: Page): string {
+function serializeArc(a: Arc, page: Page, ids: IdAllocator): string {
   // Determine orientation based on source/target kinds
   const isSourcePlace =
     page.places.some((p) => p.id === a.sourceId);
@@ -305,7 +352,7 @@ function serializeArc(a: Arc, page: Page): string {
   let bendpointsXml = '';
   for (let i = 0; i < a.bendPoints.length; i++) {
     const bp = a.bendPoints[i];
-    bendpointsXml += `<bendpoint id="${esc(a.id)}_bp${i + 1}" serial="${i + 1}">
+    bendpointsXml += `<bendpoint id="${ids.fresh()}" serial="${i + 1}">
 <posattr x="${bp.x}" y="${-bp.y}"/>
 <fillattr colour="White" pattern="Solid" filled="false"/>
 <lineattr colour="Black" thick="0" type="Solid"/>
@@ -316,22 +363,21 @@ function serializeArc(a: Arc, page: Page): string {
 
   let annotXml = '';
   if (a.inscription.text) {
-    annotXml = `<annot id="${esc(a.id)}_inscription">
-<text>${esc(a.inscription.text)}</text>
-</annot>`;
+    const pos = addOffset(arcInscriptionAnchor(a, page), a.labelOffsets?.inscription);
+    annotXml = inscriptionXml('annot', ids.fresh(), pos, a.inscription.text);
   }
 
-  return `<arc id="${esc(a.id)}" orientation="${orientation}">
+  return `<arc id="${ids.of(a.id)}" orientation="${orientation}">
 <posattr x="0.000000" y="0.000000"/>
 ${graphicsAttrs(a.graphics)}
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="${esc(transendRef)}"/>
-<placeend idref="${esc(placeendRef)}"/>
+<transend idref="${ids.of(transendRef)}"/>
+<placeend idref="${ids.of(placeendRef)}"/>
 ${bendpointsXml}${annotXml}
 </arc>`;
 }
 
-function serializeGlobbox(net: CpnNet): string {
+function serializeGlobbox(net: CpnNet, ids: IdAllocator): string {
   let colorsXml = '';
   for (const cs of net.colourSets) {
     // The colour-set colour is editor-specific; an XML comment keeps the file
@@ -354,7 +400,7 @@ function serializeGlobbox(net: CpnNet): string {
     if (typeXml) colourContent += typeXml + '\n';
     colourContent += `<layout>${esc(cs.declaration)}</layout>`;
 
-    colorsXml += `<color id="${esc(cs.id)}">
+    colorsXml += `<color id="${ids.of(cs.id)}">
 ${colourContent}
 </color>\n`;
   }
@@ -379,12 +425,12 @@ ${colourContent}
           }
           varContent += `<layout>${esc(line.trim())}</layout>`;
 
-          declsXml += `<var id="${crypto.randomUUID()}">
+          declsXml += `<var id="${ids.fresh()}">
 ${varContent}
 </var>\n`;
         } else {
           // Regular ML declaration
-          declsXml += `<ml id="${crypto.randomUUID()}">
+          declsXml += `<ml id="${ids.fresh()}">
 ${esc(line.trim())}
 <layout>${esc(line.trim())}</layout>
 </ml>\n`;
@@ -397,12 +443,12 @@ ${esc(line.trim())}
 ${colorsXml}${declsXml}</globbox>`;
 }
 
-function serializePage(page: Page, _net: CpnNet): string {
-  const places = page.places.map(serializePlace).join('\n');
-  const transitions = page.transitions.map(serializeTransition).join('\n');
-  const arcs = page.arcs.map((a) => serializeArc(a, page)).join('\n');
+function serializePage(page: Page, ids: IdAllocator): string {
+  const places = page.places.map((p) => serializePlace(p, ids)).join('\n');
+  const transitions = page.transitions.map((t) => serializeTransition(t, ids)).join('\n');
+  const arcs = page.arcs.map((a) => serializeArc(a, page, ids)).join('\n');
 
-  return `<page id="${esc(page.id)}">
+  return `<page id="${ids.of(page.id)}">
 <pageattr name="${esc(page.name)}"/>
 ${places}
 ${transitions}
@@ -410,9 +456,42 @@ ${arcs}
 </page>`;
 }
 
+/**
+ * The sections CPN Tools writes after the pages. Kept minimal: one instance per page, and one
+ * binder with a sheet per instance so the pages open on load. Options/IndexNode are left to
+ * CPN Tools' defaults.
+ */
+function trailerXml(net: CpnNet, ids: IdAllocator): string {
+  const instances = net.pages.map((page) => ({ id: ids.fresh(), page: ids.of(page.id) }));
+  const sheets = instances
+    .map((inst, i) => {
+      const view = 'panx="0.000000" pany="0.000000" zoom="1.000000"';
+      return `<cpnsheet id="${ids.fresh()}" ${view} instance="${inst.id}">
+<zorder><position value="${i}"/></zorder>
+</cpnsheet>`;
+    })
+    .join('\n');
+
+  return `<instances>
+${instances.map((inst) => `<instance id="${inst.id}" page="${inst.page}"/>`).join('\n')}
+</instances>
+<options/>
+<binders>
+<cpnbinder id="${ids.fresh()}" x="0" y="0" width="1200" height="700">
+<sheets>
+${sheets}
+</sheets>
+<zorder><position value="0"/></zorder>
+</cpnbinder>
+</binders>
+<monitorblock name="Monitors"/>
+<IndexNode expanded="true"/>`;
+}
+
 export function serializeCpnXml(net: CpnNet): string {
-  const globbox = serializeGlobbox(net);
-  const pages = net.pages.map((p) => serializePage(p, net)).join('\n');
+  const ids = new IdAllocator();
+  const globbox = serializeGlobbox(net, ids);
+  const pages = net.pages.map((p) => serializePage(p, ids)).join('\n');
 
   return `<?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE workspaceElements PUBLIC "-//CPN//DTD CPNXML 1.0//EN" "http://cpntools.org/DTD/6/cpn.dtd">
@@ -421,6 +500,7 @@ export function serializeCpnXml(net: CpnNet): string {
 <cpnet>
 ${globbox}
 ${pages}
+${trailerXml(net, ids)}
 </cpnet>
 </workspaceElements>`;
 }

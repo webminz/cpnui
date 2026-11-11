@@ -4,134 +4,174 @@
 <generator tool="CPN Editor" version="1.0.0" format="6"/>
 <cpnet>
 <globbox>
-<color id="05acad57-83da-492a-9b0c-d87c422b6d9c">
+<color id="ID1">
 <!-- cpn-editor:colour=#3b82f6 -->
 <id>Temp</id>
 <int/>
 <layout>colset Temp = int;</layout>
 </color>
-<color id="006a27b1-b788-414d-90ae-91c06ab14947">
+<color id="ID2">
 <!-- cpn-editor:colour=#6b7280 -->
 <id>U</id>
 <unit/>
 <layout>colset U = unit;</layout>
 </color>
-<color id="d3dc90b9-1780-409c-acb4-19e0e03e02bf">
+<color id="ID3">
 <!-- cpn-editor:colour=#64748b -->
 <id>UT</id>
 <timed/>
 <unit/>
 <layout>colset UT = unit timed;</layout>
 </color>
-<var id="e702aed7-4fbb-4f42-9ac2-72b0bc4e1424">
+<var id="ID4">
 <type><id>Temp</id></type>
 <id>t</id>
 <layout>var t: Temp;</layout>
 </var>
-<var id="241f19ce-a48d-4bf8-a15c-22ca2bb5db5c">
+<var id="ID5">
 <type><id>U</id></type>
 <id>a</id>
 <layout>var a:U;</layout>
 </var>
-<var id="e9816438-3775-47c8-a4b4-bc5a3efa2179">
+<var id="ID6">
 <type><id>UT</id></type>
 <id>b</id>
 <layout>var b:UT;</layout>
 </var>
 </globbox>
-<page id="0e7e3a76-13e3-4c8b-9762-743a7e4e21aa">
+<page id="ID72">
 <pageattr name="Page 1"/>
-<place id="4188a70f-514e-42ac-ab4c-7804a63b4178">
+<place id="ID8">
 <posattr x="-300" y="200"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <text>on</text>
 <ellipse w="50.000000" h="50.000000"/>
-<type id="U">
+<type id="ID7">
+<posattr x="-269.000000" y="225.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>U</text>
 </type>
 
 </place>
-<place id="49e27938-d509-4a27-a8bd-86ed6709290d">
+<place id="ID11">
 <posattr x="0" y="200"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <text>off</text>
 <ellipse w="50.000000" h="50.000000"/>
-<type id="U">
+<type id="ID9">
+<posattr x="31.000000" y="225.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>U</text>
 </type>
-<initmark id="49e27938-d509-4a27-a8bd-86ed6709290d_initmark">
+<initmark id="ID10">
+<posattr x="31.000000" y="175.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>1`()</text>
 </initmark>
 </place>
-<place id="c89903fc-598c-4812-97dd-371be6b59d61">
+<place id="ID14">
 <posattr x="-160" y="-100"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <text>temp</text>
 <ellipse w="50.000000" h="50.000000"/>
-<type id="Temp">
+<type id="ID12">
+<posattr x="-129.000000" y="-75.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>Temp</text>
 </type>
-<initmark id="c89903fc-598c-4812-97dd-371be6b59d61_initmark">
+<initmark id="ID13">
+<posattr x="-129.000000" y="-125.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>1`15</text>
 </initmark>
 </place>
-<place id="848e90dd-10a6-4869-b700-83357c18b5e9">
+<place id="ID17">
 <posattr x="-600" y="-100"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <text>heater</text>
 <ellipse w="50.000000" h="50.000000"/>
-<type id="UT">
+<type id="ID15">
+<posattr x="-569.000000" y="-75.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>UT</text>
 </type>
-<initmark id="848e90dd-10a6-4869-b700-83357c18b5e9_initmark">
+<initmark id="ID16">
+<posattr x="-569.000000" y="-125.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>1`()</text>
 </initmark>
 </place>
-<place id="7d1f58d4-acf1-4208-8e17-e9e44453de93">
+<place id="ID19">
 <posattr x="200" y="-100"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <text>door</text>
 <ellipse w="50.000000" h="50.000000"/>
-<type id="UT">
+<type id="ID18">
+<posattr x="231.000000" y="-75.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>UT</text>
 </type>
 
 </place>
-<trans id="8d85e7ae-3933-466c-8908-0d47c9e85f33">
+<trans id="ID21">
 <posattr x="-300" y="40"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <text>switch_off</text>
 <box w="60.000000" h="40.000000"/>
-<cond id="8d85e7ae-3933-466c-8908-0d47c9e85f33_cond">
+<cond id="ID20">
+<posattr x="-336.000000" y="60.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>t&gt;22</text>
 </cond>
 
 </trans>
-<trans id="9354729a-0b45-4c27-98d3-3905769bfee8">
+<trans id="ID23">
 <posattr x="0" y="40"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <text>switch_on</text>
 <box w="60.000000" h="40.000000"/>
-<cond id="9354729a-0b45-4c27-98d3-3905769bfee8_cond">
+<cond id="ID22">
+<posattr x="-36.000000" y="60.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>t&lt;18</text>
 </cond>
 
 </trans>
-<trans id="1bf3f7f4-d241-4066-8409-ed44198bb540">
+<trans id="ID24">
 <posattr x="-400" y="-100"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
@@ -141,7 +181,7 @@
 
 
 </trans>
-<trans id="0655448f-d4d4-4a91-8477-67baf4b63ffe">
+<trans id="ID25">
 <posattr x="0" y="-100"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
@@ -151,292 +191,380 @@
 
 
 </trans>
-<arc id="58b28316-116b-4c9e-8618-d4bca764f2e2" orientation="PtoT">
+<arc id="ID27" orientation="PtoT">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="8d85e7ae-3933-466c-8908-0d47c9e85f33"/>
-<placeend idref="4188a70f-514e-42ac-ab4c-7804a63b4178"/>
-<annot id="58b28316-116b-4c9e-8618-d4bca764f2e2_inscription">
+<transend idref="ID21"/>
+<placeend idref="ID8"/>
+<annot id="ID26">
+<posattr x="-300.000000" y="134.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>a</text>
 </annot>
 </arc>
-<arc id="73c29f65-5b2d-4c39-aeae-a5b423fbb160" orientation="TtoP">
+<arc id="ID29" orientation="TtoP">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="8d85e7ae-3933-466c-8908-0d47c9e85f33"/>
-<placeend idref="49e27938-d509-4a27-a8bd-86ed6709290d"/>
-<annot id="73c29f65-5b2d-4c39-aeae-a5b423fbb160_inscription">
+<transend idref="ID21"/>
+<placeend idref="ID11"/>
+<annot id="ID28">
+<posattr x="-150.000000" y="134.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>a</text>
 </annot>
 </arc>
-<arc id="d423c035-19c4-4aaf-aab0-f1da46a6e7aa" orientation="PtoT">
+<arc id="ID31" orientation="PtoT">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="9354729a-0b45-4c27-98d3-3905769bfee8"/>
-<placeend idref="49e27938-d509-4a27-a8bd-86ed6709290d"/>
-<annot id="d423c035-19c4-4aaf-aab0-f1da46a6e7aa_inscription">
+<transend idref="ID23"/>
+<placeend idref="ID11"/>
+<annot id="ID30">
+<posattr x="0.000000" y="134.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>a</text>
 </annot>
 </arc>
-<arc id="d187039c-aa1d-4fde-acf4-1c5cadb80b21" orientation="TtoP">
+<arc id="ID33" orientation="TtoP">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="9354729a-0b45-4c27-98d3-3905769bfee8"/>
-<placeend idref="4188a70f-514e-42ac-ab4c-7804a63b4178"/>
-<annot id="d187039c-aa1d-4fde-acf4-1c5cadb80b21_inscription">
+<transend idref="ID23"/>
+<placeend idref="ID8"/>
+<annot id="ID32">
+<posattr x="-150.000000" y="134.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>a</text>
 </annot>
 </arc>
-<arc id="305937d2-2b73-47e6-bcc6-1d4b1d7a47dc" orientation="PtoT">
+<arc id="ID35" orientation="PtoT">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="8d85e7ae-3933-466c-8908-0d47c9e85f33"/>
-<placeend idref="c89903fc-598c-4812-97dd-371be6b59d61"/>
-<annot id="305937d2-2b73-47e6-bcc6-1d4b1d7a47dc_inscription">
+<transend idref="ID21"/>
+<placeend idref="ID14"/>
+<annot id="ID34">
+<posattr x="-230.000000" y="-16.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>t</text>
 </annot>
 </arc>
-<arc id="c57c6503-fee2-412d-8ffc-3aac9fb9f187" orientation="TtoP">
+<arc id="ID37" orientation="TtoP">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="8d85e7ae-3933-466c-8908-0d47c9e85f33"/>
-<placeend idref="c89903fc-598c-4812-97dd-371be6b59d61"/>
-<annot id="c57c6503-fee2-412d-8ffc-3aac9fb9f187_inscription">
+<transend idref="ID21"/>
+<placeend idref="ID14"/>
+<annot id="ID36">
+<posattr x="-230.000000" y="-16.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>t</text>
 </annot>
 </arc>
-<arc id="e6860794-1448-4b70-8dee-712f5c7f0c55" orientation="PtoT">
+<arc id="ID39" orientation="PtoT">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="9354729a-0b45-4c27-98d3-3905769bfee8"/>
-<placeend idref="c89903fc-598c-4812-97dd-371be6b59d61"/>
-<annot id="e6860794-1448-4b70-8dee-712f5c7f0c55_inscription">
+<transend idref="ID23"/>
+<placeend idref="ID14"/>
+<annot id="ID38">
+<posattr x="-80.000000" y="-16.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>t</text>
 </annot>
 </arc>
-<arc id="ba8eccc3-368e-44f0-86da-3d8c9f2addbf" orientation="TtoP">
+<arc id="ID41" orientation="TtoP">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="9354729a-0b45-4c27-98d3-3905769bfee8"/>
-<placeend idref="c89903fc-598c-4812-97dd-371be6b59d61"/>
-<annot id="ba8eccc3-368e-44f0-86da-3d8c9f2addbf_inscription">
+<transend idref="ID23"/>
+<placeend idref="ID14"/>
+<annot id="ID40">
+<posattr x="-80.000000" y="-16.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>t</text>
 </annot>
 </arc>
-<arc id="4e452cd2-60c1-43d9-80d6-eb871eec08da" orientation="PtoT">
+<arc id="ID44" orientation="PtoT">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="1bf3f7f4-d241-4066-8409-ed44198bb540"/>
-<placeend idref="848e90dd-10a6-4869-b700-83357c18b5e9"/>
-<bendpoint id="4e452cd2-60c1-43d9-80d6-eb871eec08da_bp1" serial="1">
+<transend idref="ID24"/>
+<placeend idref="ID17"/>
+<bendpoint id="ID42" serial="1">
 <posattr x="-500" y="-80"/>
 <fillattr colour="White" pattern="Solid" filled="false"/>
 <lineattr colour="Black" thick="0" type="Solid"/>
 <textattr colour="Black" bold="false"/>
 <text></text>
 </bendpoint>
-<annot id="4e452cd2-60c1-43d9-80d6-eb871eec08da_inscription">
+<annot id="ID43">
+<posattr x="-450.000000" y="-76.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>b</text>
 </annot>
 </arc>
-<arc id="165a2b64-ceb6-4298-a9aa-80d4559ef834" orientation="TtoP">
+<arc id="ID47" orientation="TtoP">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="1bf3f7f4-d241-4066-8409-ed44198bb540"/>
-<placeend idref="848e90dd-10a6-4869-b700-83357c18b5e9"/>
-<bendpoint id="165a2b64-ceb6-4298-a9aa-80d4559ef834_bp1" serial="1">
+<transend idref="ID24"/>
+<placeend idref="ID17"/>
+<bendpoint id="ID45" serial="1">
 <posattr x="-500" y="-120"/>
 <fillattr colour="White" pattern="Solid" filled="false"/>
 <lineattr colour="Black" thick="0" type="Solid"/>
 <textattr colour="Black" bold="false"/>
 <text></text>
 </bendpoint>
-<annot id="165a2b64-ceb6-4298-a9aa-80d4559ef834_inscription">
+<annot id="ID46">
+<posattr x="-550.000000" y="-96.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>b@+15</text>
 </annot>
 </arc>
-<arc id="976920e4-d6d3-41a9-b2c0-6befc19d4174" orientation="TtoP">
+<arc id="ID50" orientation="TtoP">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="1bf3f7f4-d241-4066-8409-ed44198bb540"/>
-<placeend idref="4188a70f-514e-42ac-ab4c-7804a63b4178"/>
-<bendpoint id="976920e4-d6d3-41a9-b2c0-6befc19d4174_bp1" serial="1">
+<transend idref="ID24"/>
+<placeend idref="ID8"/>
+<bendpoint id="ID48" serial="1">
 <posattr x="-400" y="200"/>
 <fillattr colour="White" pattern="Solid" filled="false"/>
 <lineattr colour="Black" thick="0" type="Solid"/>
 <textattr colour="Black" bold="false"/>
 <text></text>
 </bendpoint>
-<annot id="976920e4-d6d3-41a9-b2c0-6befc19d4174_inscription">
+<annot id="ID49">
+<posattr x="-350.000000" y="214.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>a</text>
 </annot>
 </arc>
-<arc id="23361473-ed03-486b-ae4a-6e2edeeb7ff0" orientation="PtoT">
+<arc id="ID53" orientation="PtoT">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="1bf3f7f4-d241-4066-8409-ed44198bb540"/>
-<placeend idref="4188a70f-514e-42ac-ab4c-7804a63b4178"/>
-<bendpoint id="23361473-ed03-486b-ae4a-6e2edeeb7ff0_bp1" serial="1">
+<transend idref="ID24"/>
+<placeend idref="ID8"/>
+<bendpoint id="ID51" serial="1">
 <posattr x="-400" y="200"/>
 <fillattr colour="White" pattern="Solid" filled="false"/>
 <lineattr colour="Black" thick="0" type="Solid"/>
 <textattr colour="Black" bold="false"/>
 <text></text>
 </bendpoint>
-<annot id="23361473-ed03-486b-ae4a-6e2edeeb7ff0_inscription">
+<annot id="ID52">
+<posattr x="-400.000000" y="64.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>a</text>
 </annot>
 </arc>
-<arc id="848efc40-195c-41a5-b6db-5613acb2e9ce" orientation="PtoT">
+<arc id="ID56" orientation="PtoT">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="1bf3f7f4-d241-4066-8409-ed44198bb540"/>
-<placeend idref="c89903fc-598c-4812-97dd-371be6b59d61"/>
-<bendpoint id="848efc40-195c-41a5-b6db-5613acb2e9ce_bp1" serial="1">
+<transend idref="ID24"/>
+<placeend idref="ID14"/>
+<bendpoint id="ID54" serial="1">
 <posattr x="-280" y="-120"/>
 <fillattr colour="White" pattern="Solid" filled="false"/>
 <lineattr colour="Black" thick="0" type="Solid"/>
 <textattr colour="Black" bold="false"/>
 <text></text>
 </bendpoint>
-<annot id="848efc40-195c-41a5-b6db-5613acb2e9ce_inscription">
+<annot id="ID55">
+<posattr x="-340.000000" y="-96.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>t</text>
 </annot>
 </arc>
-<arc id="ae52a411-b133-4f87-8318-b9e2221c0013" orientation="TtoP">
+<arc id="ID59" orientation="TtoP">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="1bf3f7f4-d241-4066-8409-ed44198bb540"/>
-<placeend idref="c89903fc-598c-4812-97dd-371be6b59d61"/>
-<bendpoint id="ae52a411-b133-4f87-8318-b9e2221c0013_bp1" serial="1">
+<transend idref="ID24"/>
+<placeend idref="ID14"/>
+<bendpoint id="ID57" serial="1">
 <posattr x="-280" y="-80"/>
 <fillattr colour="White" pattern="Solid" filled="false"/>
 <lineattr colour="Black" thick="0" type="Solid"/>
 <textattr colour="Black" bold="false"/>
 <text></text>
 </bendpoint>
-<annot id="ae52a411-b133-4f87-8318-b9e2221c0013_inscription">
+<annot id="ID58">
+<posattr x="-220.000000" y="-76.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>t+1</text>
 </annot>
 </arc>
-<arc id="14dfd663-ed2b-4a7b-8ce3-5256e7a1b6f4" orientation="PtoT">
+<arc id="ID62" orientation="PtoT">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="0655448f-d4d4-4a91-8477-67baf4b63ffe"/>
-<placeend idref="c89903fc-598c-4812-97dd-371be6b59d61"/>
-<bendpoint id="14dfd663-ed2b-4a7b-8ce3-5256e7a1b6f4_bp1" serial="1">
+<transend idref="ID25"/>
+<placeend idref="ID14"/>
+<bendpoint id="ID60" serial="1">
 <posattr x="-80" y="-80"/>
 <fillattr colour="White" pattern="Solid" filled="false"/>
 <lineattr colour="Black" thick="0" type="Solid"/>
 <textattr colour="Black" bold="false"/>
 <text></text>
 </bendpoint>
-<annot id="14dfd663-ed2b-4a7b-8ce3-5256e7a1b6f4_inscription">
+<annot id="ID61">
+<posattr x="-40.000000" y="-76.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>t</text>
 </annot>
 </arc>
-<arc id="7c31c835-a340-47a3-a909-fb91df074d7b" orientation="TtoP">
+<arc id="ID65" orientation="TtoP">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="0655448f-d4d4-4a91-8477-67baf4b63ffe"/>
-<placeend idref="c89903fc-598c-4812-97dd-371be6b59d61"/>
-<bendpoint id="7c31c835-a340-47a3-a909-fb91df074d7b_bp1" serial="1">
+<transend idref="ID25"/>
+<placeend idref="ID14"/>
+<bendpoint id="ID63" serial="1">
 <posattr x="-80" y="-120"/>
 <fillattr colour="White" pattern="Solid" filled="false"/>
 <lineattr colour="Black" thick="0" type="Solid"/>
 <textattr colour="Black" bold="false"/>
 <text></text>
 </bendpoint>
-<annot id="7c31c835-a340-47a3-a909-fb91df074d7b_inscription">
+<annot id="ID64">
+<posattr x="-120.000000" y="-96.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>t-3</text>
 </annot>
 </arc>
-<arc id="7e71a397-41e8-4d44-a0dc-8de984cf5657" orientation="PtoT">
+<arc id="ID68" orientation="PtoT">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="0655448f-d4d4-4a91-8477-67baf4b63ffe"/>
-<placeend idref="7d1f58d4-acf1-4208-8e17-e9e44453de93"/>
-<bendpoint id="7e71a397-41e8-4d44-a0dc-8de984cf5657_bp1" serial="1">
+<transend idref="ID25"/>
+<placeend idref="ID19"/>
+<bendpoint id="ID66" serial="1">
 <posattr x="100" y="-120"/>
 <fillattr colour="White" pattern="Solid" filled="false"/>
 <lineattr colour="Black" thick="0" type="Solid"/>
 <textattr colour="Black" bold="false"/>
 <text></text>
 </bendpoint>
-<annot id="7e71a397-41e8-4d44-a0dc-8de984cf5657_inscription">
+<annot id="ID67">
+<posattr x="50.000000" y="-96.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>b@+60</text>
 </annot>
 </arc>
-<arc id="c7c7ac45-61ad-4989-8b46-4613a061acdd" orientation="TtoP">
+<arc id="ID71" orientation="TtoP">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="0655448f-d4d4-4a91-8477-67baf4b63ffe"/>
-<placeend idref="7d1f58d4-acf1-4208-8e17-e9e44453de93"/>
-<bendpoint id="c7c7ac45-61ad-4989-8b46-4613a061acdd_bp1" serial="1">
+<transend idref="ID25"/>
+<placeend idref="ID19"/>
+<bendpoint id="ID69" serial="1">
 <posattr x="100" y="-80"/>
 <fillattr colour="White" pattern="Solid" filled="false"/>
 <lineattr colour="Black" thick="0" type="Solid"/>
 <textattr colour="Black" bold="false"/>
 <text></text>
 </bendpoint>
-<annot id="c7c7ac45-61ad-4989-8b46-4613a061acdd_inscription">
+<annot id="ID70">
+<posattr x="150.000000" y="-76.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>b</text>
 </annot>
 </arc>
 </page>
+<instances>
+<instance id="ID73" page="ID72"/>
+</instances>
+<options/>
+<binders>
+<cpnbinder id="ID75" x="0" y="0" width="1200" height="700">
+<sheets>
+<cpnsheet id="ID74" panx="0.000000" pany="0.000000" zoom="1.000000" instance="ID73">
+<zorder><position value="0"/></zorder>
+</cpnsheet>
+</sheets>
+<zorder><position value="0"/></zorder>
+</cpnbinder>
+</binders>
+<monitorblock name="Monitors"/>
+<IndexNode expanded="true"/>
 </cpnet>
 </workspaceElements>

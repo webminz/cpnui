@@ -10,6 +10,12 @@ import {
   Transition,
 } from '../core/model';
 import { COLOUR_SET_PALETTE } from '../core/model/factory';
+import {
+  arcInscriptionAnchor,
+  offsetFrom,
+  placeLabelAnchors,
+  transitionLabelAnchors,
+} from './label-anchors';
 
 function text(el: Element, selector: string): string {
   const node = el.querySelector(selector);
@@ -117,12 +123,28 @@ function parsePosition(el: Element): Point {
   };
 }
 
+/**
+ * Offset of an inscription's posattr from its default anchor. Undefined when the inscription
+ * has no posattr (older exports of this editor) or sits exactly on the anchor.
+ */
+function inscriptionOffset(el: Element, selector: string, anchor: Point): Point | undefined {
+  const inscription = el.querySelector(selector);
+  if (!inscription?.querySelector(':scope > posattr')) return undefined;
+  return offsetFrom(anchor, parsePosition(inscription));
+}
+
+/** Drop unset keys; undefined when no label was moved. */
+function compactOffsets<T extends object>(offsets: T): T | undefined {
+  const entries = Object.entries(offsets).filter(([, v]) => v !== undefined);
+  return entries.length > 0 ? (Object.fromEntries(entries) as T) : undefined;
+}
+
 function parsePlace(el: Element): Place {
   const ellipse = el.querySelector(':scope > ellipse');
   const w = ellipse ? numAttr(ellipse, 'w', 50) : 50;
   const h = ellipse ? numAttr(ellipse, 'h', 50) : 50;
 
-  return {
+  const place: Place = {
     kind: 'place',
     id: attr(el, 'id'),
     name: text(el, ':scope > text'),
@@ -132,6 +154,12 @@ function parsePlace(el: Element): Place {
     initialMarking: { text: text(el, ':scope > initmark > text') },
     graphics: parseGraphics(el),
   };
+  const anchors = placeLabelAnchors(place);
+  const labelOffsets = compactOffsets({
+    colourSet: inscriptionOffset(el, ':scope > type', anchors.colourSet),
+    marking: inscriptionOffset(el, ':scope > initmark', anchors.marking),
+  });
+  return labelOffsets ? { ...place, labelOffsets } : place;
 }
 
 function parseTransition(el: Element): Transition {
@@ -139,7 +167,7 @@ function parseTransition(el: Element): Transition {
   const w = box ? numAttr(box, 'w', 60) : 60;
   const h = box ? numAttr(box, 'h', 40) : 40;
 
-  return {
+  const transition: Transition = {
     kind: 'transition',
     id: attr(el, 'id'),
     name: text(el, ':scope > text'),
@@ -149,6 +177,12 @@ function parseTransition(el: Element): Transition {
     duration: { text: text(el, ':scope > time > text') },
     graphics: parseGraphics(el),
   };
+  const anchors = transitionLabelAnchors(transition);
+  const labelOffsets = compactOffsets({
+    guard: inscriptionOffset(el, ':scope > cond', anchors.guard),
+    duration: inscriptionOffset(el, ':scope > time', anchors.duration),
+  });
+  return labelOffsets ? { ...transition, labelOffsets } : transition;
 }
 
 function parseArc(el: Element): Arc {
@@ -400,15 +434,22 @@ function parseDeclarations(globbox: Element): string {
 function parsePage(pageEl: Element): Page {
   const places = Array.from(pageEl.querySelectorAll(':scope > place')).map(parsePlace);
   const transitions = Array.from(pageEl.querySelectorAll(':scope > trans')).map(parseTransition);
-  const arcs = Array.from(pageEl.querySelectorAll(':scope > arc')).map(parseArc);
+  const arcEls = Array.from(pageEl.querySelectorAll(':scope > arc'));
 
-  return {
+  const page: Page = {
     id: attr(pageEl, 'id'),
     name: pageEl.querySelector(':scope > pageattr')?.getAttribute('name') ?? 'Page 1',
     places,
     transitions,
-    arcs,
+    arcs: arcEls.map(parseArc),
   };
+  // Arc label anchors depend on the arc's end nodes, so offsets are resolved once the page exists.
+  page.arcs = page.arcs.map((arc, i) => {
+    const anchor = arcInscriptionAnchor(arc, page);
+    const inscription = inscriptionOffset(arcEls[i], ':scope > annot', anchor);
+    return inscription ? { ...arc, labelOffsets: { inscription } } : arc;
+  });
+  return page;
 }
 
 export function parseCpnXml(xml: string): CpnNet {
@@ -466,25 +507,70 @@ export function computeNormalizationScale(net: CpnNet): number {
 export function scaleNet(net: CpnNet, factor: number): CpnNet {
   if (factor === 1) return net;
   const s = (p: Point): Point => ({ x: p.x * factor, y: p.y * factor });
+
+  /**
+   * Moved labels keep their absolute position scaled: the anchors contain fixed padding that
+   * doesn't scale, so the offset is re-derived as `scaled(oldAnchor + offset) - newAnchor`.
+   * Labels without an anchor (the name label) just have their offset scaled.
+   */
+  const scaleOffsets = <T extends object>(
+    offsets: T | undefined,
+    oldAnchors: Partial<Record<string, Point>>,
+    newAnchors: Partial<Record<string, Point>>,
+  ): T | undefined => {
+    if (!offsets) return undefined;
+    const entries = Object.entries(offsets) as [string, Point | undefined][];
+    const scaled = entries.map(([key, off]) => {
+      const oldAnchor = oldAnchors[key];
+      const newAnchor = newAnchors[key];
+      if (!off || !oldAnchor || !newAnchor) return [key, off && s(off)];
+      const pos = s({ x: oldAnchor.x + off.x, y: oldAnchor.y + off.y });
+      return [key, { x: pos.x - newAnchor.x, y: pos.y - newAnchor.y }];
+    });
+    return Object.fromEntries(scaled) as T;
+  };
+
   return {
     ...net,
-    pages: net.pages.map((page) => ({
-      ...page,
-      places: page.places.map((p) => ({
-        ...p,
-        position: s(p.position),
-        size: { width: p.size.width * factor, height: p.size.height * factor },
-      })),
-      transitions: page.transitions.map((t) => ({
-        ...t,
-        position: s(t.position),
-        size: { width: t.size.width * factor, height: t.size.height * factor },
-      })),
-      arcs: page.arcs.map((a) => ({
-        ...a,
-        bendPoints: a.bendPoints.map(s),
-      })),
-    })),
+    pages: net.pages.map((page) => {
+      const places = page.places.map((p) => {
+        const scaled = {
+          ...p,
+          position: s(p.position),
+          size: { width: p.size.width * factor, height: p.size.height * factor },
+        };
+        const labelOffsets = scaleOffsets(
+          p.labelOffsets,
+          placeLabelAnchors(p),
+          placeLabelAnchors(scaled),
+        );
+        return { ...scaled, labelOffsets };
+      });
+      const transitions = page.transitions.map((t) => {
+        const scaled = {
+          ...t,
+          position: s(t.position),
+          size: { width: t.size.width * factor, height: t.size.height * factor },
+        };
+        const labelOffsets = scaleOffsets(
+          t.labelOffsets,
+          transitionLabelAnchors(t),
+          transitionLabelAnchors(scaled),
+        );
+        return { ...scaled, labelOffsets };
+      });
+      const scaledPage: Page = { ...page, places, transitions, arcs: [] };
+      scaledPage.arcs = page.arcs.map((a) => {
+        const scaled = { ...a, bendPoints: a.bendPoints.map(s) };
+        const labelOffsets = scaleOffsets(
+          a.labelOffsets,
+          { inscription: arcInscriptionAnchor(a, page) },
+          { inscription: arcInscriptionAnchor(scaled, scaledPage) },
+        );
+        return { ...scaled, labelOffsets };
+      });
+      return scaledPage;
+    }),
   };
 }
 

@@ -4,143 +4,175 @@
 <generator tool="CPN Editor" version="1.0.0" format="6"/>
 <cpnet>
 <globbox>
-<color id="bb1d7a2d-00a0-41e8-a8e4-fd316e37eef4">
+<color id="ID1">
 <!-- cpn-editor:colour=#06b6d4 -->
 <id>Doc</id>
 <string/>
 <layout>colset Doc = string;</layout>
 </color>
-<color id="4013bd00-8da3-4c9c-a904-4f7792dd2949">
+<color id="ID2">
 <!-- cpn-editor:colour=#ef4444 -->
 <id>Person</id>
 <string/>
 <layout>colset Person = string;</layout>
 </color>
-<color id="afa2e367-3aae-4f37-a720-6ab38e600ca8">
+<color id="ID3">
 <!-- cpn-editor:colour=#ec4899 -->
 <id>Signatures</id>
 <list><id>Person</id></list>
 <layout>colset Signatures = list Person;</layout>
 </color>
-<color id="5042bd4b-9666-4885-bd20-c63a5790e324">
+<color id="ID4">
 <!-- cpn-editor:colour=#14b8a6 -->
 <id>SignedDoc</id>
 <product><id>Doc</id><id>Signatures</id></product>
 <layout>colset SignedDoc = product Doc * Signatures;</layout>
 </color>
-<color id="73d3d111-e73e-412b-b492-4bd3805bc8e6">
+<color id="ID5">
 <!-- cpn-editor:colour=#6b7280 -->
 <id>BlackToken</id>
 <unit/>
 <layout>colset BlackToken = unit;</layout>
 </color>
-<var id="bea79f07-9953-4f8f-a5f5-f53f193be73e">
+<var id="ID6">
 <type><id>Doc</id></type>
 <id>d</id>
 <layout>var d: Doc;</layout>
 </var>
-<var id="cfa05a7b-66da-4547-9e31-2e50ed136c1d">
+<var id="ID7">
 <type><id>Person</id></type>
 <id>p</id>
 <layout>var p: Person;</layout>
 </var>
-<var id="f601e543-2b3a-46f8-bcc7-74ef89e87632">
+<var id="ID8">
 <type><id>Signatures</id></type>
 <id>s</id>
 <layout>var s: Signatures;</layout>
 </var>
-<ml id="95c9815c-d53c-400b-b8ba-57d9b2cf8966">
+<ml id="ID9">
 fun notin(p: Person, s: Signatures) = if s = [] then true else
 <layout>fun notin(p: Person, s: Signatures) = if s = [] then true else</layout>
 </ml>
-<ml id="cd0189a1-b85b-4404-8064-52a4d025a1e6">
+<ml id="ID10">
 if (hd s) = p then false else notin(p, tl s);
 <layout>if (hd s) = p then false else notin(p, tl s);</layout>
 </ml>
-<ml id="76d4d4dc-3467-4060-a918-5a778b98d28e">
+<ml id="ID11">
 fun count(s:Signatures) = if s = [] then 0 else count(tl s);
 <layout>fun count(s:Signatures) = if s = [] then 0 else count(tl s);</layout>
 </ml>
 </globbox>
-<page id="b989b1d7-3163-40a6-aab8-be561fa60bb8">
+<page id="ID55">
 <pageattr name="Page 1"/>
-<place id="005c6444-aa6e-43b9-abef-3e9a04bcba65">
+<place id="ID14">
 <posattr x="420" y="-200"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <text>person</text>
 <ellipse w="60.000000" h="20.000000"/>
-<type id="Person">
+<type id="ID12">
+<posattr x="456.000000" y="-190.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>Person</text>
 </type>
-<initmark id="005c6444-aa6e-43b9-abef-3e9a04bcba65_initmark">
+<initmark id="ID13">
+<posattr x="456.000000" y="-210.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>1`&quot;Time&quot;++1`&quot;Sue&quot;++1`&quot;Clare&quot;++1`&quot;John&quot;</text>
 </initmark>
 </place>
-<place id="79fbbf10-7f06-411f-b488-b72de18f54c7">
+<place id="ID16">
 <posattr x="400" y="-400"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <text>unsigned_doc</text>
 <ellipse w="60.000000" h="20.000000"/>
-<type id="Doc">
+<type id="ID15">
+<posattr x="436.000000" y="-390.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>Doc</text>
 </type>
 
 </place>
-<place id="c0b02e29-020f-430e-8ccc-cfd1d34ac346">
+<place id="ID18">
 <posattr x="700" y="-400"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <text>pile</text>
 <ellipse w="60.000000" h="20.000000"/>
-<type id="SignedDoc">
+<type id="ID17">
+<posattr x="736.000000" y="-390.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>SignedDoc</text>
 </type>
 
 </place>
-<place id="4bcfe356-72a3-4a7b-9a25-ac304d3a68fe">
+<place id="ID20">
 <posattr x="1040" y="-400"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <text>signeed_doc</text>
 <ellipse w="60.000000" h="20.000000"/>
-<type id="SignedDoc">
+<type id="ID19">
+<posattr x="1076.000000" y="-390.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>SignedDoc</text>
 </type>
 
 </place>
-<place id="7ad99943-e8c0-4d4d-bd8b-dd6258b7a42c">
+<place id="ID23">
 <posattr x="700" y="-580"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <text>free</text>
 <ellipse w="60.000000" h="20.000000"/>
-<type id="BlackToken">
+<type id="ID21">
+<posattr x="736.000000" y="-570.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>BlackToken</text>
 </type>
-<initmark id="7ad99943-e8c0-4d4d-bd8b-dd6258b7a42c_initmark">
+<initmark id="ID22">
+<posattr x="736.000000" y="-590.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>5`()</text>
 </initmark>
 </place>
-<trans id="2579a999-5084-41b3-a248-d56014cfb673">
+<trans id="ID25">
 <posattr x="700" y="-200"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <text>sign</text>
 <box w="40.000000" h="20.000000"/>
-<cond id="2579a999-5084-41b3-a248-d56014cfb673_cond">
+<cond id="ID24">
+<posattr x="674.000000" y="-190.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>count(s) &lt; 3 andalso notin(p,s)</text>
 </cond>
 
 </trans>
-<trans id="ddd78964-646d-409b-9f37-c32dc54d7b04">
+<trans id="ID26">
 <posattr x="540" y="-400"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
@@ -150,180 +182,240 @@ fun count(s:Signatures) = if s = [] then 0 else count(tl s);
 
 
 </trans>
-<trans id="07f037c7-96fc-4bc4-b5c0-0583d3de8e16">
+<trans id="ID28">
 <posattr x="900" y="-400"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <text>release</text>
 <box w="40.000000" h="20.000000"/>
-<cond id="07f037c7-96fc-4bc4-b5c0-0583d3de8e16_cond">
+<cond id="ID27">
+<posattr x="874.000000" y="-390.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>count(s)&gt;=3</text>
 </cond>
 
 </trans>
-<arc id="b3cbc157-62cd-457a-965f-d81e5fa9618a" orientation="PtoT">
+<arc id="ID31" orientation="PtoT">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="2579a999-5084-41b3-a248-d56014cfb673"/>
-<placeend idref="005c6444-aa6e-43b9-abef-3e9a04bcba65"/>
-<bendpoint id="b3cbc157-62cd-457a-965f-d81e5fa9618a_bp1" serial="1">
+<transend idref="ID25"/>
+<placeend idref="ID14"/>
+<bendpoint id="ID29" serial="1">
 <posattr x="580" y="-260"/>
 <fillattr colour="White" pattern="Solid" filled="false"/>
 <lineattr colour="Black" thick="0" type="Solid"/>
 <textattr colour="Black" bold="false"/>
 <text></text>
 </bendpoint>
-<annot id="b3cbc157-62cd-457a-965f-d81e5fa9618a_inscription">
+<annot id="ID30">
+<posattr x="640.000000" y="-216.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>p</text>
 </annot>
 </arc>
-<arc id="fe026782-2aa8-4ae1-b8ff-0b41061f3909" orientation="TtoP">
+<arc id="ID34" orientation="TtoP">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="2579a999-5084-41b3-a248-d56014cfb673"/>
-<placeend idref="005c6444-aa6e-43b9-abef-3e9a04bcba65"/>
-<bendpoint id="fe026782-2aa8-4ae1-b8ff-0b41061f3909_bp1" serial="1">
+<transend idref="ID25"/>
+<placeend idref="ID14"/>
+<bendpoint id="ID32" serial="1">
 <posattr x="580" y="-120"/>
 <fillattr colour="White" pattern="Solid" filled="false"/>
 <lineattr colour="Black" thick="0" type="Solid"/>
 <textattr colour="Black" bold="false"/>
 <text></text>
 </bendpoint>
-<annot id="fe026782-2aa8-4ae1-b8ff-0b41061f3909_inscription">
+<annot id="ID33">
+<posattr x="500.000000" y="-146.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>p</text>
 </annot>
 </arc>
-<arc id="159b5d66-51be-4664-a1ff-5a42789a1ac1" orientation="TtoP">
+<arc id="ID37" orientation="TtoP">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="2579a999-5084-41b3-a248-d56014cfb673"/>
-<placeend idref="c0b02e29-020f-430e-8ccc-cfd1d34ac346"/>
-<bendpoint id="159b5d66-51be-4664-a1ff-5a42789a1ac1_bp1" serial="1">
+<transend idref="ID25"/>
+<placeend idref="ID18"/>
+<bendpoint id="ID35" serial="1">
 <posattr x="740" y="-300"/>
 <fillattr colour="White" pattern="Solid" filled="false"/>
 <lineattr colour="Black" thick="0" type="Solid"/>
 <textattr colour="Black" bold="false"/>
 <text></text>
 </bendpoint>
-<annot id="159b5d66-51be-4664-a1ff-5a42789a1ac1_inscription">
+<annot id="ID36">
+<posattr x="720.000000" y="-336.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>(d,p::s)</text>
 </annot>
 </arc>
-<arc id="ba4e6e27-13ca-4cf0-8ceb-884c8d6242f8" orientation="PtoT">
+<arc id="ID40" orientation="PtoT">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="2579a999-5084-41b3-a248-d56014cfb673"/>
-<placeend idref="c0b02e29-020f-430e-8ccc-cfd1d34ac346"/>
-<bendpoint id="ba4e6e27-13ca-4cf0-8ceb-884c8d6242f8_bp1" serial="1">
+<transend idref="ID25"/>
+<placeend idref="ID18"/>
+<bendpoint id="ID38" serial="1">
 <posattr x="660" y="-300"/>
 <fillattr colour="White" pattern="Solid" filled="false"/>
 <lineattr colour="Black" thick="0" type="Solid"/>
 <textattr colour="Black" bold="false"/>
 <text></text>
 </bendpoint>
-<annot id="ba4e6e27-13ca-4cf0-8ceb-884c8d6242f8_inscription">
+<annot id="ID39">
+<posattr x="680.000000" y="-236.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>(d,s)</text>
 </annot>
 </arc>
-<arc id="f103055e-75c1-42e4-b6d5-68655c3fd3cb" orientation="TtoP">
+<arc id="ID42" orientation="TtoP">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="ddd78964-646d-409b-9f37-c32dc54d7b04"/>
-<placeend idref="c0b02e29-020f-430e-8ccc-cfd1d34ac346"/>
-<annot id="f103055e-75c1-42e4-b6d5-68655c3fd3cb_inscription">
+<transend idref="ID26"/>
+<placeend idref="ID18"/>
+<annot id="ID41">
+<posattr x="620.000000" y="-386.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>(d,[])</text>
 </annot>
 </arc>
-<arc id="def61a90-118f-4585-ad02-363ae3312fd9" orientation="PtoT">
+<arc id="ID44" orientation="PtoT">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="ddd78964-646d-409b-9f37-c32dc54d7b04"/>
-<placeend idref="79fbbf10-7f06-411f-b488-b72de18f54c7"/>
-<annot id="def61a90-118f-4585-ad02-363ae3312fd9_inscription">
+<transend idref="ID26"/>
+<placeend idref="ID16"/>
+<annot id="ID43">
+<posattr x="470.000000" y="-386.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>d</text>
 </annot>
 </arc>
-<arc id="f7a3d568-5d83-4812-9b37-124cd8929c9f" orientation="PtoT">
+<arc id="ID47" orientation="PtoT">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="ddd78964-646d-409b-9f37-c32dc54d7b04"/>
-<placeend idref="7ad99943-e8c0-4d4d-bd8b-dd6258b7a42c"/>
-<bendpoint id="f7a3d568-5d83-4812-9b37-124cd8929c9f_bp1" serial="1">
+<transend idref="ID26"/>
+<placeend idref="ID23"/>
+<bendpoint id="ID45" serial="1">
 <posattr x="540" y="-580"/>
 <fillattr colour="White" pattern="Solid" filled="false"/>
 <lineattr colour="Black" thick="0" type="Solid"/>
 <textattr colour="Black" bold="false"/>
 <text></text>
 </bendpoint>
-<annot id="f7a3d568-5d83-4812-9b37-124cd8929c9f_inscription">
+<annot id="ID46">
+<posattr x="540.000000" y="-476.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>()</text>
 </annot>
 </arc>
-<arc id="cf06bf39-d8a5-4f19-8b70-80e994c6cb36" orientation="PtoT">
+<arc id="ID49" orientation="PtoT">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="07f037c7-96fc-4bc4-b5c0-0583d3de8e16"/>
-<placeend idref="c0b02e29-020f-430e-8ccc-cfd1d34ac346"/>
-<annot id="cf06bf39-d8a5-4f19-8b70-80e994c6cb36_inscription">
+<transend idref="ID28"/>
+<placeend idref="ID18"/>
+<annot id="ID48">
+<posattr x="800.000000" y="-386.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>(d,s)</text>
 </annot>
 </arc>
-<arc id="1981bf17-d131-41f0-9b3f-4eeb1b2401b4" orientation="TtoP">
+<arc id="ID52" orientation="TtoP">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="07f037c7-96fc-4bc4-b5c0-0583d3de8e16"/>
-<placeend idref="7ad99943-e8c0-4d4d-bd8b-dd6258b7a42c"/>
-<bendpoint id="1981bf17-d131-41f0-9b3f-4eeb1b2401b4_bp1" serial="1">
+<transend idref="ID28"/>
+<placeend idref="ID23"/>
+<bendpoint id="ID50" serial="1">
 <posattr x="900" y="-580"/>
 <fillattr colour="White" pattern="Solid" filled="false"/>
 <lineattr colour="Black" thick="0" type="Solid"/>
 <textattr colour="Black" bold="false"/>
 <text></text>
 </bendpoint>
-<annot id="1981bf17-d131-41f0-9b3f-4eeb1b2401b4_inscription">
+<annot id="ID51">
+<posattr x="800.000000" y="-566.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>()</text>
 </annot>
 </arc>
-<arc id="ea651df6-6a73-42dc-807f-5202568771bd" orientation="TtoP">
+<arc id="ID54" orientation="TtoP">
 <posattr x="0.000000" y="0.000000"/>
 <fillattr colour="White" pattern="" filled="false"/>
 <lineattr colour="Black" thick="1" type="solid"/>
 <textattr colour="Black" bold="false"/>
 <arrowattr headsize="1.200000" currentcyckle="2"/>
-<transend idref="07f037c7-96fc-4bc4-b5c0-0583d3de8e16"/>
-<placeend idref="4bcfe356-72a3-4a7b-9a25-ac304d3a68fe"/>
-<annot id="ea651df6-6a73-42dc-807f-5202568771bd_inscription">
+<transend idref="ID28"/>
+<placeend idref="ID20"/>
+<annot id="ID53">
+<posattr x="970.000000" y="-386.000000"/>
+<fillattr colour="White" pattern="Solid" filled="false"/>
+<lineattr colour="Black" thick="0" type="Solid"/>
+<textattr colour="Black" bold="false"/>
 <text>(d,s)</text>
 </annot>
 </arc>
 </page>
+<instances>
+<instance id="ID56" page="ID55"/>
+</instances>
+<options/>
+<binders>
+<cpnbinder id="ID58" x="0" y="0" width="1200" height="700">
+<sheets>
+<cpnsheet id="ID57" panx="0.000000" pany="0.000000" zoom="1.000000" instance="ID56">
+<zorder><position value="0"/></zorder>
+</cpnsheet>
+</sheets>
+<zorder><position value="0"/></zorder>
+</cpnbinder>
+</binders>
+<monitorblock name="Monitors"/>
+<IndexNode expanded="true"/>
 </cpnet>
 </workspaceElements>
