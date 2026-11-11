@@ -128,3 +128,17 @@ CSS custom properties prefixed `--cpn-*` defined in `styles.scss`. Dark mode tog
 - State mutations always clone before mutating (`structuredClone`)
 - Prettier: 100 char width, single quotes
 - Keyboard shortcuts are single letters (V, P, T, A, H) handled in `PaletteComponent`
+
+## Agent skills
+
+### Issue tracker
+
+Issues live in GitHub Issues for `webminz/cpnui` (via `gh`). See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default canonical labels: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context: root `GLOSSARY.md` + `docs/adr/`. See `docs/agents/domain.md`.
